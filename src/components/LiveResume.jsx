@@ -6,8 +6,6 @@ import { useSelector } from 'react-redux'
 const LiveResume = ({ person }) => {
   const { person_info } = useSelector((state) => state.person)
 
-  console.log(person_info)
-
   return (
     <div className='live-resume-container'>
       {person?.name ? <p>{person.name}</p> : <p>{person_info.name}</p>}

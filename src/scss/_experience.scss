@@ -1,0 +1,39 @@
+.experience-wrapper {
+  background-color: #f9f9f9;
+  width: 60%;
+  min-height: 100vh;
+  .experience-container {
+    display: flex;
+    .navbar-container {
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      width: 100%;
+      border-bottom: 1px solid #000;
+    }
+  }
+  .form-container {
+    position: relative;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    gap: 20px;
+    margin: 0 auto;
+    margin-top: 20px;
+    width: 80%;
+    .date-container {
+      display: flex;
+      justify-content: space-between;
+      position: relative;
+      div {
+        width: 400px;
+      }
+    }
+    .more-experience-button {
+      background-color: #62a1eb;
+      color: white;
+      width: 40%;
+      padding: 10px 20px;
+    }
+  }
+}
