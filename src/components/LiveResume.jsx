@@ -8,7 +8,11 @@ const LiveResume = ({ person }) => {
       <p>{person?.name}</p>
       <p>{person?.surname}</p>
       {person?.image ? (
-        <img width='200px' height='200px' src={person?.image} />
+        <img
+          width='200px'
+          height='200px'
+          src={URL.createObjectURL(person?.image)}
+        />
       ) : (
         <></>
       )}

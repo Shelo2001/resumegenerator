@@ -23,8 +23,30 @@
     width: 80%;
     .name-container {
       display: flex;
-      justify-content: center;
-      gap: 200px;
+      justify-content: space-between;
+      position: relative;
+      span {
+        position: absolute;
+        top: 30px;
+        margin-left: 390px;
+      }
+      .labelerror {
+        color: red;
+      }
+      .error,
+      .success {
+        width: 100%;
+        border-radius: 6px;
+        outline: none;
+        padding: 10px;
+        font-family: HelveticaNeue;
+      }
+      .error {
+        border: 2px solid red;
+      }
+      .success {
+        border: 2px solid #98e37e;
+      }
       div {
         width: 400px;
       }
@@ -37,10 +59,64 @@
     .aboutme {
       display: flex;
       flex-direction: column;
+      textarea {
+        padding: 10px;
+        font-size: 16px;
+        font-weight: 600;
+        font-family: HelveticaNeue;
+      }
     }
     .mail-container {
       display: flex;
       flex-direction: column;
+      position: relative;
+      span {
+        position: absolute;
+        right: -15px;
+        bottom: 56px;
+      }
+      .labelerror {
+        color: red;
+      }
+      .error,
+      .success {
+        width: 100%;
+        border-radius: 6px;
+        outline: none;
+        padding: 10px;
+        font-family: HelveticaNeue;
+      }
+      .error {
+        border: 2px solid red;
+      }
+      .success {
+        border: 2px solid #98e37e;
+      }
+    }
+    .phone-container {
+      position: relative;
+      span {
+        position: absolute;
+        right: -15px;
+        bottom: 58px;
+      }
+      .labelerror {
+        color: red;
+      }
+      .error,
+      .success {
+        width: 100%;
+        border-radius: 6px;
+        outline: none;
+        padding: 10px;
+        font-family: HelveticaNeue;
+      }
+      .error {
+        border: 2px solid red;
+      }
+      .success {
+        border: 2px solid #98e37e;
+      }
     }
     .purple-button {
       position: absolute;
