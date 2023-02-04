@@ -1,12 +1,17 @@
 import React from 'react'
 import '../global.scss'
 import logo from '../assets/logo3.png'
+import { useSelector } from 'react-redux'
 
 const LiveResume = ({ person }) => {
+  const { person_info } = useSelector((state) => state.person)
+
+  console.log(person_info)
+
   return (
     <div className='live-resume-container'>
-      <p>{person?.name}</p>
-      <p>{person?.surname}</p>
+      {person?.name ? <p>{person.name}</p> : <p>{person_info.name}</p>}
+      {person?.surname ? <p>{person.surname}</p> : <p>{person_info.surname}</p>}
       {person?.image ? (
         <img
           width='200px'
@@ -14,11 +19,19 @@ const LiveResume = ({ person }) => {
           src={URL.createObjectURL(person?.image)}
         />
       ) : (
-        <></>
+        <img src={person_info.image} />
       )}
-      <p>{person?.aboutme}</p>
-      <p>{person?.email}</p>
-      <p>{person?.phoneNumber}</p>
+      {person?.aboutme ? (
+        <p>{person?.aboutme}</p>
+      ) : (
+        <p>{person_info?.aboutme}</p>
+      )}
+      {person?.email ? <p>{person?.email}</p> : <p>{person_info?.email}</p>}
+      {person?.phoneNumber ? (
+        <p>{person?.phoneNumber}</p>
+      ) : (
+        <p>{person_info?.phoneNumber}</p>
+      )}
       <img width='50px' height='50px' src={logo} />
     </div>
   )

@@ -10,20 +10,26 @@ import {
   nameAndSurnameValidation,
   phoneValidation,
 } from '../Validations'
+import { useDispatch } from 'react-redux'
+import { addPersonInfo } from '../features/personSlice'
 
 const PersonalInfo = () => {
   const navigate = useNavigate()
-  const [name, setName] = useState('')
-  const [surname, setSurname] = useState('')
-  const [aboutme, setAboutme] = useState('')
-  const [email, setEmail] = useState('')
-  const [phoneNumber, setPhoneNumber] = useState('')
+  const [name, setName] = useState(localStorage.getItem('name') || '')
+  const [surname, setSurname] = useState(localStorage.getItem('surname') || '')
+  const [aboutme, setAboutme] = useState(localStorage.getItem('aboutme') || '')
+  const [email, setEmail] = useState(localStorage.getItem('email') || '')
+  const [phoneNumber, setPhoneNumber] = useState(
+    localStorage.getItem('phoneNumber') || ''
+  )
   const [image, setImage] = useState(null)
+  const [personImage, setPersonImage] = useState(null)
   const [nameError, setNameError] = useState('')
   const [surnameError, setSurnameError] = useState('')
   const [emailError, setEmailError] = useState('')
   const [phoneNumberError, setPhoneNumberError] = useState('')
   const person = { name, surname, image, aboutme, email, phoneNumber }
+  const dispatch = useDispatch()
 
   useEffect(() => {
     setNameError(nameAndSurnameValidation(name))
@@ -32,10 +38,23 @@ const PersonalInfo = () => {
     setPhoneNumberError(phoneValidation(phoneNumber))
   }, [name, surname, email, phoneNumber])
 
+  function getBase64(file) {
+    var reader = new FileReader()
+    reader.readAsDataURL(file)
+    reader.onload = function () {
+      setPersonImage(reader.result)
+    }
+  }
+
+  if (image) {
+    getBase64(image)
+  }
+
   const submitPersonalInfo = async (e) => {
     e.preventDefault()
-
     if (name && surname && email && phoneNumber && image) {
+      let personInfo = { ...person, image: personImage }
+      dispatch(addPersonInfo(personInfo))
       navigate('/resume/2')
     }
   }
@@ -63,9 +82,11 @@ const PersonalInfo = () => {
                   სახელი
                 </label>
                 <input
+                  onKeyUp={(e) => localStorage.setItem('name', e.target.value)}
                   onChange={(e) => setName(e.target.value)}
                   placeholder='ანზორ'
                   type='text'
+                  value={name}
                   name='firstName'
                   className={nameError ? 'error' : ''}
                 />
@@ -78,8 +99,10 @@ const PersonalInfo = () => {
               <>
                 <label for='firstName'>სახელი</label>
                 <input
+                  onKeyUp={(e) => localStorage.setItem('name', e.target.value)}
                   onChange={(e) => setName(e.target.value)}
                   placeholder='ანზორ'
+                  value={name}
                   type='text'
                   name='firstName'
                   className={
@@ -102,9 +125,13 @@ const PersonalInfo = () => {
                   გვარი
                 </label>
                 <input
+                  onKeyUp={(e) =>
+                    localStorage.setItem('surname', e.target.value)
+                  }
                   onChange={(e) => setSurname(e.target.value)}
                   placeholder='მუმლაძე'
                   type='text'
+                  value={surname}
                   name='surname'
                   className={surnameError ? 'error' : ''}
                 />
@@ -118,6 +145,10 @@ const PersonalInfo = () => {
                 <label for='firstName'>გვარი</label>
                 <input
                   onChange={(e) => setSurname(e.target.value)}
+                  onKeyUp={(e) =>
+                    localStorage.setItem('surname', e.target.value)
+                  }
+                  value={surname}
                   placeholder='ანზორ'
                   type='text'
                   name='firstName'
@@ -160,6 +191,8 @@ const PersonalInfo = () => {
           <label for='aboutme'>ჩემ შესახებ (არასავალდებულო)</label>
           <textarea
             onChange={(e) => setAboutme(e.target.value)}
+            onKeyUp={(e) => localStorage.setItem('aboutme', e.target.value)}
+            value={aboutme}
             placeholder='ზოგადი ინფო შენ შესახებ'
             name='aboutme'
           />
@@ -173,7 +206,9 @@ const PersonalInfo = () => {
               <input
                 onChange={(e) => setEmail(e.target.value)}
                 placeholder='anzor666@redberry.ge'
+                onKeyUp={(e) => localStorage.setItem('email', e.target.value)}
                 type='email'
+                value={email}
                 name='email'
                 className={emailError ? 'error' : ''}
               />
@@ -187,6 +222,8 @@ const PersonalInfo = () => {
               <label for='email'>ელ.ფოსტა</label>
               <input
                 onChange={(e) => setEmail(e.target.value)}
+                onKeyUp={(e) => localStorage.setItem('email', e.target.value)}
+                value={email}
                 placeholder='anzor666@redberry.ge'
                 type='email'
                 name='email'
@@ -210,9 +247,13 @@ const PersonalInfo = () => {
                 მობილურის ნომერი
               </label>
               <input
+                onKeyUp={(e) =>
+                  localStorage.setItem('phoneNumber', e.target.value)
+                }
                 onChange={(e) => setPhoneNumber(e.target.value)}
                 placeholder='+995 551 12 34 56'
                 type='text'
+                value={phoneNumber}
                 name='phoneNumber'
                 className={phoneNumberError ? 'error' : ''}
               />
@@ -225,6 +266,10 @@ const PersonalInfo = () => {
             <>
               <label for='phoneNumber'>მობილურის ნომერი</label>
               <input
+                onKeyUp={(e) =>
+                  localStorage.setItem('phoneNumber', e.target.value)
+                }
+                value={phoneNumber}
                 onChange={(e) => setPhoneNumber(e.target.value)}
                 placeholder='+995 551 12 34 56'
                 type='text'

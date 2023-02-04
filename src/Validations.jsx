@@ -22,12 +22,15 @@ const emailValidation = (email) => {
 }
 
 const phoneValidation = (phoneNumber) => {
+  const numbers = /^\d+$/
   if (!phoneNumber) {
     return false
   } else if (!phoneNumber.startsWith('+995')) {
     return 'ტელეფონის ნომრის ველი უნდა იწყებოდეს +995'
   } else if (phoneNumber.length !== 13) {
     return 'ქართული ტელეფონის ნომერი'
+  } else if (!numbers.test(phoneNumber.split('+')[1])) {
+    return 'მხოლოდ ციფრები'
   } else {
     return ''
   }
