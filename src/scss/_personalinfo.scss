@@ -1,0 +1,51 @@
+.personal-info-wrapper {
+  background-color: #f9f9f9;
+  width: 60%;
+  min-height: 100vh;
+  .personal-info-container {
+    display: flex;
+    .navbar-container {
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      width: 100%;
+      border-bottom: 1px solid #000;
+    }
+  }
+  .form-container {
+    position: relative;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    gap: 30px;
+    margin: 0 auto;
+    margin-top: 40px;
+    width: 80%;
+    .name-container {
+      display: flex;
+      justify-content: center;
+      gap: 200px;
+      div {
+        width: 400px;
+      }
+    }
+    .file-container {
+      display: flex;
+      align-items: center;
+      gap: 40px;
+    }
+    .aboutme {
+      display: flex;
+      flex-direction: column;
+    }
+    .mail-container {
+      display: flex;
+      flex-direction: column;
+    }
+    .purple-button {
+      position: absolute;
+      bottom: -80px;
+      right: -20px;
+    }
+  }
+}
