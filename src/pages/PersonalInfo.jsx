@@ -63,7 +63,12 @@ const PersonalInfo = () => {
     <div className='personal-info-wrapper'>
       <div className='personal-info-container'>
         <Link to='/'>
-          <button className='back-button'>
+          <button
+            onClick={() => {
+              localStorage.clear()
+            }}
+            className='back-button'
+          >
             <img src={backarrow} />
           </button>
         </Link>

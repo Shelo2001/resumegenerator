@@ -21,6 +21,33 @@
     margin: 0 auto;
     margin-top: 20px;
     width: 80%;
+    .position-container,
+    .employer-container {
+      position: relative;
+      span {
+        position: absolute;
+        right: -10px;
+        top: 34px;
+      }
+      .labelerror {
+        color: rgb(230, 75, 75);
+      }
+      .error,
+      .success {
+        width: 100%;
+        border-radius: 6px;
+        outline: none;
+        padding: 10px;
+        font-family: HelveticaNeue;
+      }
+      .error {
+        border: 2px solid rgb(230, 75, 75);
+      }
+      .success {
+        border: 2px solid #98e37e;
+      }
+    }
+
     .date-container {
       display: flex;
       justify-content: space-between;
@@ -29,11 +56,25 @@
         width: 400px;
       }
     }
+    .description-container {
+      position: relative;
+      span {
+        position: absolute;
+        right: 0;
+        bottom: 5px;
+      }
+    }
     .more-experience-button {
       background-color: #62a1eb;
       color: white;
       width: 40%;
       padding: 10px 20px;
+    }
+    .button-group {
+      display: flex;
+      justify-content: space-between;
+      margin-top: 30px;
+      margin-bottom: 30px;
     }
   }
 }

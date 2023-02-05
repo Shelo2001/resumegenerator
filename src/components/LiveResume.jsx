@@ -17,7 +17,7 @@ const LiveResume = ({ person }) => {
           src={URL.createObjectURL(person?.image)}
         />
       ) : (
-        <img src={person_info.image} />
+        <img width='200px' height='200px' src={person_info.image} />
       )}
       {person?.aboutme ? (
         <p>{person?.aboutme}</p>

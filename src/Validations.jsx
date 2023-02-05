@@ -36,4 +36,38 @@ const phoneValidation = (phoneNumber) => {
   }
 }
 
-export { nameAndSurnameValidation, emailValidation, phoneValidation }
+const positionValidation = (position) => {
+  if (!position) {
+    return false
+  } else if (position.length < 2) {
+    return 'მინიმუმ 2 სიმბოლო'
+  } else {
+    return ''
+  }
+}
+
+const employerValidation = (employer) => {
+  if (!employer) {
+    return false
+  } else if (employer.length < 2) {
+    return 'მინიმუმ 2 სიმბოლო'
+  } else {
+    return ''
+  }
+}
+const descriptionValidation = (description) => {
+  if (!description) {
+    return 'აუცილებელი ველი'
+  } else {
+    return ''
+  }
+}
+
+export {
+  nameAndSurnameValidation,
+  emailValidation,
+  phoneValidation,
+  employerValidation,
+  positionValidation,
+  descriptionValidation,
+}
