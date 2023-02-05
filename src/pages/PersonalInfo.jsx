@@ -35,7 +35,7 @@ const PersonalInfo = () => {
     setNameError(nameAndSurnameValidation(name))
     setSurnameError(nameAndSurnameValidation(surname))
     setEmailError(emailValidation(email))
-    setPhoneNumberError(phoneValidation(phoneNumber))
+    setPhoneNumberError(phoneValidation(phoneNumber.replace(/ /g, '')))
   }, [name, surname, email, phoneNumber])
 
   function getBase64(file) {
@@ -56,6 +56,23 @@ const PersonalInfo = () => {
       let personInfo = { ...person, image: personImage }
       dispatch(addPersonInfo(personInfo))
       navigate('/resume/2')
+    }
+  }
+
+  const phoneNumberChange = (e) => {
+    if (e.target.value.length > 0) {
+      if (e.target.value.length == 4 && e.keyCode !== 8) {
+        setPhoneNumber(e.target.value + ' ')
+      }
+      if (e.target.value.length == 8 && e.keyCode !== 8) {
+        setPhoneNumber(e.target.value + ' ')
+      }
+      if (e.target.value.length == 11 && e.keyCode !== 8) {
+        setPhoneNumber(e.target.value + ' ')
+      }
+      if (e.target.value.length == 14 && e.keyCode !== 8) {
+        setPhoneNumber(e.target.value + ' ')
+      }
     }
   }
 
@@ -258,6 +275,7 @@ const PersonalInfo = () => {
                 onChange={(e) => setPhoneNumber(e.target.value)}
                 placeholder='+995 551 12 34 56'
                 type='text'
+                onKeyDown={phoneNumberChange}
                 value={phoneNumber}
                 name='phoneNumber'
                 className={phoneNumberError ? 'error' : ''}
@@ -275,6 +293,7 @@ const PersonalInfo = () => {
                   localStorage.setItem('phoneNumber', e.target.value)
                 }
                 value={phoneNumber}
+                onKeyDown={phoneNumberChange}
                 onChange={(e) => setPhoneNumber(e.target.value)}
                 placeholder='+995 551 12 34 56'
                 type='text'

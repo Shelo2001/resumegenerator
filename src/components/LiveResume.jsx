@@ -3,7 +3,7 @@ import '../global.scss'
 import logo from '../assets/logo3.png'
 import { useSelector } from 'react-redux'
 
-const LiveResume = ({ person }) => {
+const LiveResume = ({ person, experience }) => {
   const { person_info } = useSelector((state) => state.person)
 
   return (
@@ -29,6 +29,16 @@ const LiveResume = ({ person }) => {
         <p>{person?.phoneNumber}</p>
       ) : (
         <p>{person_info?.phoneNumber}</p>
+      )}
+      {experience ? (
+        experience.map((field) => (
+          <>
+            <p>{field.position}</p>
+            <p></p>
+          </>
+        ))
+      ) : (
+        <></>
       )}
       <img width='50px' height='50px' src={logo} />
     </div>

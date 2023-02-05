@@ -27,9 +27,9 @@ const phoneValidation = (phoneNumber) => {
     return false
   } else if (!phoneNumber.startsWith('+995')) {
     return 'ტელეფონის ნომრის ველი უნდა იწყებოდეს +995'
-  } else if (phoneNumber.length !== 13) {
+  } else if (phoneNumber.trim().length !== 13) {
     return 'ქართული ტელეფონის ნომერი'
-  } else if (!numbers.test(phoneNumber.split('+')[1])) {
+  } else if (!numbers.test(phoneNumber.trim().split('+')[1])) {
     return 'მხოლოდ ციფრები'
   } else {
     return ''

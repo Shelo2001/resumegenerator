@@ -8,7 +8,8 @@
       display: flex;
       justify-content: space-between;
       align-items: center;
-      width: 100%;
+      margin: auto;
+      width: 83%;
       border-bottom: 1px solid #000;
     }
   }
@@ -26,7 +27,7 @@
       position: relative;
       span {
         position: absolute;
-        right: -10px;
+        right: -14px;
         top: 34px;
       }
       .labelerror {
@@ -57,24 +58,50 @@
       }
     }
     .description-container {
+      .labelerror {
+        color: rgb(230, 75, 75);
+      }
+      .error,
+      .success {
+        width: 100%;
+        border-radius: 6px;
+        outline: none;
+        padding: 10px;
+        font-family: HelveticaNeue;
+      }
+      .error {
+        border: 2px solid rgb(230, 75, 75);
+      }
+      .success {
+        border: 2px solid #98e37e;
+      }
       position: relative;
+      textarea {
+        padding: 10px;
+        font-size: 16px;
+        font-weight: 600;
+      }
       span {
         position: absolute;
-        right: 0;
+        right: -14px;
         bottom: 5px;
       }
     }
     .more-experience-button {
       background-color: #62a1eb;
       color: white;
-      width: 40%;
-      padding: 10px 20px;
+      width: 32%;
+      padding: 10px 10px;
     }
-    .button-group {
+    .button-group,
+    .education-button-group {
       display: flex;
       justify-content: space-between;
       margin-top: 30px;
       margin-bottom: 30px;
+    }
+    .education-button-group {
+      margin-top: 160px;
     }
   }
 }

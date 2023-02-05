@@ -1,6 +1,6 @@
 import React, { useEffect, useState } from 'react'
 import LiveResume from '../components/LiveResume'
-import { Link } from 'react-router-dom'
+import { Link, useNavigate } from 'react-router-dom'
 import backarrow from '../assets/backarrow.svg'
 import {
   descriptionValidation,
@@ -9,7 +9,7 @@ import {
 } from '../Validations.jsx'
 import successsvg from '../assets/Vector.svg'
 import errorsvg from '../assets/Vector (1).svg'
-import { useDispatch } from 'react-redux'
+import { useDispatch, useSelector } from 'react-redux'
 import { addPersonExperience } from '../features/personSlice'
 
 const Experience = () => {
@@ -32,6 +32,12 @@ const Experience = () => {
   const [descriptionError, setDescriptionError] = useState('')
   const [touchedDescription, setTouchedDescription] = useState(false)
   const dispatch = useDispatch()
+  const navigate = useNavigate()
+
+  const { person_experience } = useSelector((state) => state.person)
+
+  console.log(person_experience)
+
   const onClickHandler = () => {
     if (!employer || !position || !startdate || !enddate || !description) {
     } else {
@@ -42,6 +48,8 @@ const Experience = () => {
       setEmployer('')
       setDescription('')
       setTouchedDescription(false)
+      dispatch(addPersonExperience(array))
+      window.scroll(0, 1000)
     }
   }
 
@@ -51,6 +59,11 @@ const Experience = () => {
     if (touchedDescription) {
       setDescriptionError(descriptionValidation(description))
     }
+    window.scroll({
+      top: document.body.offsetHeight,
+      left: 0,
+      behavior: 'smooth',
+    })
   }, [position, employer, description, touchedDescription])
 
   const submitHandler = () => {
@@ -59,6 +72,7 @@ const Experience = () => {
       array.push({ position, employer, startdate, enddate, description })
 
       dispatch(addPersonExperience(array))
+      navigate('/resume/3')
     }
   }
 
@@ -82,7 +96,7 @@ const Experience = () => {
         </div>
       </div>
       <div className='form-container'>
-        {array.map((_, i) => (
+        {array.map((a, i) => (
           <>
             <div className='position-container'>
               {positionError ? (
@@ -95,7 +109,7 @@ const Experience = () => {
                     onKeyUp={(e) =>
                       localStorage.setItem('position', e.target.value)
                     }
-                    placeholder='ანზორ'
+                    placeholder='დეველოპერი, დიზაინერი, ა.შ.'
                     value={position}
                     type='text'
                     name='position'
@@ -114,7 +128,7 @@ const Experience = () => {
                     onKeyUp={(e) =>
                       localStorage.setItem('position', e.target.value)
                     }
-                    placeholder='ანზორ'
+                    placeholder='დეველოპერი, დიზაინერი, ა.შ.'
                     value={position}
                     type='text'
                     name='position'
@@ -147,7 +161,7 @@ const Experience = () => {
                       localStorage.setItem('employer', e.target.value)
                     }
                     value={employer}
-                    placeholder='ანზორ'
+                    placeholder='დამსაქმებელი'
                     type='text'
                     name='position'
                     className={employerError ? 'error' : ''}
@@ -165,7 +179,7 @@ const Experience = () => {
                     onKeyUp={(e) =>
                       localStorage.setItem('employer', e.target.value)
                     }
-                    placeholder='ანზორ'
+                    placeholder='დამსაქმებელი'
                     value={employer}
                     type='text'
                     name='employer'
@@ -222,7 +236,7 @@ const Experience = () => {
                       localStorage.setItem('description', e.target.value)
                     }
                     value={description}
-                    placeholder='ზოგადი ინფო შენ შესახებ'
+                    placeholder='როლი თანამდებობაზე და ზოგადი აღწერა'
                     name='description'
                     className={
                       descriptionError
@@ -251,7 +265,7 @@ const Experience = () => {
                       localStorage.setItem('description', e.target.value)
                     }
                     onBlur={(e) => setTouchedDescription(true)}
-                    placeholder='ზოგადი ინფო შენ შესახებ'
+                    placeholder='როლი თანამდებობაზე და ზოგადი აღწერა'
                     name='description'
                     value={description}
                     className={
@@ -288,7 +302,7 @@ const Experience = () => {
         </div>
       </div>
 
-      <LiveResume />
+      <LiveResume experience={array} />
     </div>
   )
 }
