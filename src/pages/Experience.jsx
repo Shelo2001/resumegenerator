@@ -36,8 +36,6 @@ const Experience = () => {
 
   const { person_experience } = useSelector((state) => state.person)
 
-  console.log(person_experience)
-
   const onClickHandler = () => {
     if (!employer || !position || !startdate || !enddate || !description) {
     } else {

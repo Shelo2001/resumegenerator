@@ -1,4 +1,4 @@
-function nameAndSurnameValidation(name) {
+const nameAndSurnameValidation = (name) => {
   const georgian = /^[ა-ჰ]+$/g
   if (!name) {
     return false

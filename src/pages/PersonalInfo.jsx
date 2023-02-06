@@ -52,7 +52,17 @@ const PersonalInfo = () => {
 
   const submitPersonalInfo = async (e) => {
     e.preventDefault()
-    if (name && surname && email && phoneNumber && image) {
+    if (
+      name &&
+      surname &&
+      email &&
+      phoneNumber &&
+      image &&
+      nameError.length < 1 &&
+      surnameError < 1 &&
+      emailError.length < 1 &&
+      phoneNumberError < 1
+    ) {
       let personInfo = { ...person, image: personImage }
       dispatch(addPersonInfo(personInfo))
       navigate('/resume/2')
