@@ -17,26 +17,28 @@ const PersonalInfo = () => {
   const navigate = useNavigate()
   const [name, setName] = useState(localStorage.getItem('name') || '')
   const [surname, setSurname] = useState(localStorage.getItem('surname') || '')
-  const [aboutme, setAboutme] = useState(localStorage.getItem('aboutme') || '')
+  const [about_me, setAbout_me] = useState(
+    localStorage.getItem('about_me') || ''
+  )
   const [email, setEmail] = useState(localStorage.getItem('email') || '')
-  const [phoneNumber, setPhoneNumber] = useState(
-    localStorage.getItem('phoneNumber') || ''
+  const [phone_number, setPhone_number] = useState(
+    localStorage.getItem('phone_number') || ''
   )
   const [image, setImage] = useState(null)
   const [personImage, setPersonImage] = useState(null)
   const [nameError, setNameError] = useState('')
   const [surnameError, setSurnameError] = useState('')
   const [emailError, setEmailError] = useState('')
-  const [phoneNumberError, setPhoneNumberError] = useState('')
-  const person = { name, surname, image, aboutme, email, phoneNumber }
+  const [phone_numberError, setPhone_numberError] = useState('')
+  const person = { name, surname, image, about_me, email, phone_number }
   const dispatch = useDispatch()
 
   useEffect(() => {
     setNameError(nameAndSurnameValidation(name))
     setSurnameError(nameAndSurnameValidation(surname))
     setEmailError(emailValidation(email))
-    setPhoneNumberError(phoneValidation(phoneNumber.replace(/ /g, '')))
-  }, [name, surname, email, phoneNumber])
+    setPhone_numberError(phoneValidation(phone_number.replace(/ /g, '')))
+  }, [name, surname, email, phone_number])
 
   function getBase64(file) {
     var reader = new FileReader()
@@ -56,12 +58,12 @@ const PersonalInfo = () => {
       name &&
       surname &&
       email &&
-      phoneNumber &&
+      phone_number &&
       image &&
       nameError.length < 1 &&
       surnameError < 1 &&
       emailError.length < 1 &&
-      phoneNumberError < 1
+      phone_numberError < 1
     ) {
       let personInfo = { ...person, image: personImage }
       dispatch(addPersonInfo(personInfo))
@@ -69,19 +71,15 @@ const PersonalInfo = () => {
     }
   }
 
-  const phoneNumberChange = (e) => {
+  const phone_numberChange = (e) => {
     if (e.target.value.length > 0) {
-      if (e.target.value.length == 4 && e.keyCode !== 8) {
-        setPhoneNumber(e.target.value + ' ')
-      }
-      if (e.target.value.length == 8 && e.keyCode !== 8) {
-        setPhoneNumber(e.target.value + ' ')
-      }
-      if (e.target.value.length == 11 && e.keyCode !== 8) {
-        setPhoneNumber(e.target.value + ' ')
-      }
-      if (e.target.value.length == 14 && e.keyCode !== 8) {
-        setPhoneNumber(e.target.value + ' ')
+      if (
+        (e.target.value.length == 4 && e.keyCode !== 8) ||
+        (e.target.value.length == 8 && e.keyCode !== 8) ||
+        (e.target.value.length == 11 && e.keyCode !== 8) ||
+        (e.target.value.length == 14 && e.keyCode !== 8)
+      ) {
+        setPhone_number(e.target.value + ' ')
       }
     }
   }
@@ -219,14 +217,14 @@ const PersonalInfo = () => {
             </span>
           )}
         </div>
-        <div className='aboutme'>
-          <label for='aboutme'>ჩემ შესახებ (არასავალდებულო)</label>
+        <div className='about_me'>
+          <label for='about_me'>ჩემ შესახებ (არასავალდებულო)</label>
           <textarea
-            onChange={(e) => setAboutme(e.target.value)}
-            onKeyUp={(e) => localStorage.setItem('aboutme', e.target.value)}
-            value={aboutme}
+            onChange={(e) => setAbout_me(e.target.value)}
+            onKeyUp={(e) => localStorage.setItem('about_me', e.target.value)}
+            value={about_me}
             placeholder='ზოგადი ინფო შენ შესახებ'
-            name='aboutme'
+            name='about_me'
           />
         </div>
         <div className='mail-container'>
@@ -273,50 +271,50 @@ const PersonalInfo = () => {
           )}
         </div>
         <div className='phone-container'>
-          {phoneNumberError ? (
+          {phone_numberError ? (
             <>
-              <label className='labelerror' for='phoneNumber'>
+              <label className='labelerror' for='phone_number'>
                 მობილურის ნომერი
               </label>
               <input
                 onKeyUp={(e) =>
-                  localStorage.setItem('phoneNumber', e.target.value)
+                  localStorage.setItem('phone_number', e.target.value)
                 }
-                onChange={(e) => setPhoneNumber(e.target.value)}
+                onChange={(e) => setPhone_number(e.target.value)}
                 placeholder='+995 551 12 34 56'
                 type='text'
-                onKeyDown={phoneNumberChange}
-                value={phoneNumber}
-                name='phoneNumber'
-                className={phoneNumberError ? 'error' : ''}
+                onKeyDown={phone_numberChange}
+                value={phone_number}
+                name='phone_number'
+                className={phone_numberError ? 'error' : ''}
               />
               <span>
                 <img src={errorsvg} />
               </span>
-              <p>{phoneNumberError}</p>
+              <p>{phone_numberError}</p>
             </>
           ) : (
             <>
-              <label for='phoneNumber'>მობილურის ნომერი</label>
+              <label for='phone_number'>მობილურის ნომერი</label>
               <input
                 onKeyUp={(e) =>
-                  localStorage.setItem('phoneNumber', e.target.value)
+                  localStorage.setItem('phone_number', e.target.value)
                 }
-                value={phoneNumber}
-                onKeyDown={phoneNumberChange}
-                onChange={(e) => setPhoneNumber(e.target.value)}
+                value={phone_number}
+                onKeyDown={phone_numberChange}
+                onChange={(e) => setPhone_number(e.target.value)}
                 placeholder='+995 551 12 34 56'
                 type='text'
-                name='phoneNumber'
+                name='phone_number'
                 className={
-                  phoneNumberError
+                  phone_numberError
                     ? 'error'
-                    : phoneNumber.length == 0
+                    : phone_number.length == 0
                     ? ''
                     : 'success'
                 }
               />
-              {phoneNumber.length !== 0 && (
+              {phone_number.length !== 0 && (
                 <span>
                   <img src={successsvg} />
                 </span>

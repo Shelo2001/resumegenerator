@@ -13,6 +13,9 @@ button {
   font-size: medium;
   font-weight: 500;
   border-radius: 100%;
+  position: absolute;
+  top: 30px;
+  left: 10px;
 }
 input[type='text'],
 input[type='email'],

@@ -22,11 +22,12 @@ const personSlice = createSlice({
   },
   reducers: {
     addPersonInfo: (state, { payload }, getState) => {
-      console.log(state.person)
       state.person_info = payload
+      localStorage.setItem('person_info', JSON.stringify(payload))
     },
     addPersonExperience: (state, { payload }, getState) => {
       state.person_experience = payload
+      localStorage.setItem('person_experience', JSON.stringify(payload))
     },
   },
   extraReducers: {

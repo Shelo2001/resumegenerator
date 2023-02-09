@@ -13,9 +13,14 @@ const Education = () => {
   const dispatch = useDispatch()
   const { degrees } = useSelector((state) => state.person)
 
+  const [array, setArray] = useState([0])
   const [description, setDescription] = useState(
     localStorage.getItem('education_description') || ''
   )
+  const [institute, setInstitute] = useState('')
+  const [degree, setDegree] = useState('')
+  const [due_date, setDue_date] = useState('')
+
   const [descriptionError, setDescriptionError] = useState('')
   const [touchedDescription, setTouchedDescription] = useState(false)
 
@@ -27,6 +32,23 @@ const Education = () => {
       setDescriptionError(descriptionValidation(description))
     }
   }, [description, touchedDescription])
+
+  useEffect(() => {
+    localStorage.setItem('degree', degree)
+    localStorage.setItem('due_date', due_date)
+  }, [degree, due_date])
+
+  const onClickHandler = () => {
+    let newarray = array
+    newarray.push({
+      description,
+      institute,
+      degree,
+      due_date,
+    })
+
+    window.scroll(0, 1000)
+  }
 
   return (
     <div className='experience-wrapper'>
@@ -48,83 +70,115 @@ const Education = () => {
         </div>
       </div>
       <div className='form-container'>
-        <div className='position-container'>
-          <label for='position'>სასწავლებელი</label>
-          <input placeholder='სასწავლებელი' type='text' name='position' />
-        </div>
-        <div className='date-container'>
-          <div>
-            <label for='startdate'>ხარისხი</label>
-            <select>
-              <option value='' disabled selected hidden>
-                აირჩიეთ ხარისხი
-              </option>
-              {degrees.map((degree) => (
-                <option value={degree.title}>{degree.title}</option>
-              ))}
-            </select>
-          </div>
-          <div>
-            <label for='enddate'>დამთავრების რიცხვი</label>
-            <input name='enddate' type='date' />
-          </div>
-        </div>
-        <div className='description-container'>
-          {descriptionError ? (
-            <>
-              <label for='description'>აღწერა</label>
-              <textarea
-                onChange={(e) => setDescription(e.target.value)}
+        {array.map((a, i) => (
+          <>
+            <div className='position-container'>
+              <label for='position'>სასწავლებელი</label>
+              <input
+                onChange={(e) => setInstitute(e.target.value)}
                 onKeyUp={(e) =>
-                  localStorage.setItem('education_description', e.target.value)
+                  localStorage.setItem('institute', e.target.value)
                 }
-                value={description}
-                placeholder='როლი თანამდებობაზე და ზოგადი აღწერა'
-                name='description'
-                className={
-                  descriptionError ? 'error' : description.length == 0 ? '' : ''
-                }
+                placeholder='სასწავლებელი'
+                type='text'
+                name='position'
               />
-              {touchedDescription && !description && (
+            </div>
+            <div className='date-container'>
+              <div>
+                <label for='degree'>ხარისხი</label>
+                <select
+                  value={degree}
+                  onSelect={(e) =>
+                    localStorage.setItem('degree', e.target.value)
+                  }
+                  onChange={(e) => setDegree(e.target.value)}
+                >
+                  <option value='' disabled hidden>
+                    აირჩიეთ ხარისხი
+                  </option>
+                  {degrees.map((degree) => (
+                    <option value={degree.title}>{degree.title}</option>
+                  ))}
+                </select>
+              </div>
+              <div>
+                <label for='enddate'>დამთავრების რიცხვი</label>
+                <input
+                  onChange={(e) => setDue_date(e.target.value)}
+                  name='enddate'
+                  type='date'
+                />
+              </div>
+            </div>
+            <div className='description-container'>
+              {descriptionError ? (
                 <>
-                  <span>
-                    <img src={errorsvg} />
-                  </span>
-                  <p>{descriptionError}</p>
+                  <label for='description'>აღწერა</label>
+                  <textarea
+                    onChange={(e) => setDescription(e.target.value)}
+                    onKeyUp={(e) =>
+                      localStorage.setItem(
+                        'education_description',
+                        e.target.value
+                      )
+                    }
+                    value={description}
+                    placeholder='როლი თანამდებობაზე და ზოგადი აღწერა'
+                    name='description'
+                    className={
+                      descriptionError
+                        ? 'error'
+                        : description.length == 0
+                        ? ''
+                        : ''
+                    }
+                  />
+                  {touchedDescription && !description && (
+                    <>
+                      <span>
+                        <img src={errorsvg} />
+                      </span>
+                      <p>{descriptionError}</p>
+                    </>
+                  )}
+                </>
+              ) : (
+                <>
+                  <label for='description'>აღწერა</label>
+                  <textarea
+                    onChange={(e) => setDescription(e.target.value)}
+                    onKeyUp={(e) =>
+                      localStorage.setItem(
+                        'education_description',
+                        e.target.value
+                      )
+                    }
+                    onBlur={(e) => setTouchedDescription(true)}
+                    placeholder='როლი თანამდებობაზე და ზოგადი აღწერა'
+                    name='description'
+                    value={description}
+                    className={
+                      descriptionError
+                        ? 'error'
+                        : description.length == 0
+                        ? ''
+                        : 'success'
+                    }
+                  />
+                  {description.length !== 0 && (
+                    <span>
+                      <img src={successsvg} />
+                    </span>
+                  )}
                 </>
               )}
-            </>
-          ) : (
-            <>
-              <label for='description'>აღწერა</label>
-              <textarea
-                onChange={(e) => setDescription(e.target.value)}
-                onKeyUp={(e) =>
-                  localStorage.setItem('education_description', e.target.value)
-                }
-                onBlur={(e) => setTouchedDescription(true)}
-                placeholder='როლი თანამდებობაზე და ზოგადი აღწერა'
-                name='description'
-                value={description}
-                className={
-                  descriptionError
-                    ? 'error'
-                    : description.length == 0
-                    ? ''
-                    : 'success'
-                }
-              />
-              {description.length !== 0 && (
-                <span>
-                  <img src={successsvg} />
-                </span>
-              )}
-            </>
-          )}
-        </div>
-        <hr style={{ width: '100%', marginTop: '50px' }} />
+            </div>
+            <hr style={{ width: '100%', marginTop: '50px' }} />
+          </>
+        ))}
 
-        <button className='more-experience-button'>
+        <button onClick={onClickHandler} className='more-experience-button'>
           სხვა სასწავლებლის დამატება
         </button>
         <div className='education-button-group'>

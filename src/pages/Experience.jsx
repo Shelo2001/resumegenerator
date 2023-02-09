@@ -13,17 +13,19 @@ import { useDispatch, useSelector } from 'react-redux'
 import { addPersonExperience } from '../features/personSlice'
 
 const Experience = () => {
-  const [array, setArray] = useState([0])
+  const [experiences, setexperiences] = useState([0])
   const [position, setPosition] = useState(
     localStorage.getItem('position') || ''
   )
   const [employer, setEmployer] = useState(
     localStorage.getItem('employer') || ''
   )
-  const [startdate, setStartdate] = useState(
-    localStorage.getItem('startdate') || ''
+  const [start_date, setStart_date] = useState(
+    localStorage.getItem('start_date') || ''
   )
-  const [enddate, setEnddate] = useState(localStorage.getItem('enddate') || '')
+  const [due_date, setdue_date] = useState(
+    localStorage.getItem('due_date') || ''
+  )
   const [description, setDescription] = useState(
     localStorage.getItem('description') || ''
   )
@@ -34,19 +36,29 @@ const Experience = () => {
   const dispatch = useDispatch()
   const navigate = useNavigate()
 
-  const { person_experience } = useSelector((state) => state.person)
-
   const onClickHandler = () => {
-    if (!employer || !position || !startdate || !enddate || !description) {
+    if (!employer) {
+      setEmployerError('asd')
+    } else if (!position) {
+      setPositionError('dsa')
+    } else if (!description) {
+      setDescriptionError('dsa')
     } else {
-      let newArray = array
-      newArray.push({ position, employer, startdate, enddate, description })
-      setArray([...newArray])
+      let newexperiences = experiences
+      newexperiences.push({
+        position,
+        employer,
+        start_date,
+        due_date,
+        description,
+      })
+      setexperiences([...newexperiences])
       setPosition('')
       setEmployer('')
       setDescription('')
+      setDescriptionError('')
       setTouchedDescription(false)
-      dispatch(addPersonExperience(array))
+      dispatch(addPersonExperience(experiences))
       window.scroll(0, 1000)
     }
   }
@@ -65,11 +77,17 @@ const Experience = () => {
   }, [position, employer, description, touchedDescription])
 
   const submitHandler = () => {
-    if (!employer || !position || !startdate || !enddate || !description) {
+    if (!employer || !position || !start_date || !due_date || !description) {
     } else {
-      array.push({ position, employer, startdate, enddate, description })
+      experiences.push({
+        position,
+        employer,
+        start_date,
+        due_date,
+        description,
+      })
 
-      dispatch(addPersonExperience(array))
+      dispatch(addPersonExperience(experiences))
       navigate('/resume/3')
     }
   }
@@ -94,7 +112,7 @@ const Experience = () => {
         </div>
       </div>
       <div className='form-container'>
-        {array.map((a, i) => (
+        {experiences.map((a, i) => (
           <>
             <div className='position-container'>
               {positionError ? (
@@ -200,26 +218,26 @@ const Experience = () => {
             </div>
             <div className='date-container'>
               <div>
-                <label for='startdate'>დაწყების რიცხვი</label>
+                <label for='start_date'>დაწყების რიცხვი</label>
                 <input
-                  onChange={(e) => setStartdate(e.target.value)}
+                  onChange={(e) => setStart_date(e.target.value)}
                   onKeyUp={(e) =>
-                    localStorage.setItem('startdate', e.target.value)
+                    localStorage.setItem('start_date', e.target.value)
                   }
-                  value={startdate}
+                  value={start_date}
                   type='date'
-                  name='startdate'
+                  name='start_date'
                 />
               </div>
               <div>
-                <label for='enddate'>დამთავრების რიცხვი</label>
+                <label for='due_date'>დამთავრების რიცხვი</label>
                 <input
-                  onChange={(e) => setEnddate(e.target.value)}
+                  onChange={(e) => setdue_date(e.target.value)}
                   onKeyUp={(e) =>
-                    localStorage.setItem('enddate', e.target.value)
+                    localStorage.setItem('due_date', e.target.value)
                   }
-                  value={enddate}
-                  name='enddate'
+                  value={due_date}
+                  name='due_date'
                   type='date'
                 />
               </div>
@@ -300,7 +318,7 @@ const Experience = () => {
         </div>
       </div>
 
-      <LiveResume experience={array} />
+      <LiveResume experience={experiences} />
     </div>
   )
 }
