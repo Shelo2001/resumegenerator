@@ -50,6 +50,7 @@ const PersonalInfo = () => {
 
   if (image) {
     getBase64(image)
+    localStorage.setItem('image', image)
   }
 
   const submitPersonalInfo = async (e) => {

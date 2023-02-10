@@ -6,22 +6,33 @@ import backarrow from '../assets/backarrow.svg'
 import successsvg from '../assets/Vector.svg'
 import errorsvg from '../assets/Vector (1).svg'
 import { useDispatch, useSelector } from 'react-redux'
-import { getDegrees } from '../features/personSlice'
-import { descriptionValidation } from '../Validations'
+import { getDegrees, storeResume } from '../features/personSlice'
+import {
+  descriptionValidation,
+  employerValidation,
+  positionValidation,
+} from '../Validations'
+import { addPersonEducation } from '../features/personSlice'
 
 const Education = () => {
   const dispatch = useDispatch()
+  const navigate = useNavigate()
   const { degrees } = useSelector((state) => state.person)
 
   const [array, setArray] = useState([0])
   const [description, setDescription] = useState(
     localStorage.getItem('education_description') || ''
   )
-  const [institute, setInstitute] = useState('')
+  const [institute, setInstitute] = useState(
+    localStorage.getItem('institute') || ''
+  )
   const [degree, setDegree] = useState('')
+  const [imageFile, setImageFile] = useState(null)
   const [due_date, setDue_date] = useState('')
 
   const [descriptionError, setDescriptionError] = useState('')
+  const [instituteError, setInstituteError] = useState('')
+  const [degreeError, setDegreeError] = useState('')
   const [touchedDescription, setTouchedDescription] = useState(false)
 
   useEffect(() => {
@@ -43,11 +54,78 @@ const Education = () => {
     newarray.push({
       description,
       institute,
-      degree,
+      degree_id: degree,
       due_date,
     })
-
+    setArray([...newarray])
+    setInstitute('')
+    setDegree('')
+    setDescription('')
+    setDescriptionError('')
+    setTouchedDescription(false)
+    dispatch(addPersonEducation(array))
     window.scroll(0, 1000)
+  }
+
+  useEffect(() => {
+    setInstituteError(positionValidation(institute))
+    setDegreeError(employerValidation(degree))
+    if (touchedDescription) {
+      setDescriptionError(descriptionValidation(description))
+    }
+    window.scroll({
+      top: document.body.offsetHeight,
+      left: 0,
+      behavior: 'smooth',
+    })
+  }, [institute, degree, description, touchedDescription])
+
+  const submitHandler = () => {
+    let newarray = array
+    newarray.push({
+      description,
+      institute,
+      degree_id: degree,
+      due_date,
+    })
+    setArray([...newarray])
+
+    dispatch(addPersonEducation(array))
+
+    const person_info = JSON.parse(localStorage.getItem('person_info'))
+    const person_experience = JSON.parse(
+      localStorage.getItem('person_experience')
+    )
+    const person_education = JSON.parse(
+      localStorage.getItem('person_education')
+    )
+    let phone_number = person_info.phone_number.replace(/ /g, '')
+
+    person_experience.shift()
+    person_education.shift()
+
+    const url = person_info.image
+    fetch(url)
+      .then((res) => res.blob())
+      .then((blob) => {
+        const file = new File([blob], 'File name', { type: 'image/png' })
+
+        localStorage.clear()
+
+        const data = {
+          name: person_info.name,
+          surname: person_info.surname,
+          email: person_info.email,
+          phone_number,
+          experiences: person_experience,
+          educations: person_education,
+          image: file,
+          about_me: person_info.about_me,
+        }
+
+        dispatch(storeResume(data))
+        navigate('/resume/overview')
+      })
   }
 
   return (
@@ -73,16 +151,57 @@ const Education = () => {
         {array.map((a, i) => (
           <>
             <div className='position-container'>
-              <label for='position'>სასწავლებელი</label>
-              <input
-                onChange={(e) => setInstitute(e.target.value)}
-                onKeyUp={(e) =>
-                  localStorage.setItem('institute', e.target.value)
-                }
-                placeholder='სასწავლებელი'
-                type='text'
-                name='position'
-              />
+              {instituteError ? (
+                <>
+                  {' '}
+                  <label for='institute' className='labelerror'>
+                    სასწავლებელი
+                  </label>
+                  <input
+                    onChange={(e) => setInstitute(e.target.value)}
+                    onKeyUp={(e) =>
+                      localStorage.setItem('institute', e.target.value)
+                    }
+                    placeholder='სასწავლებელი'
+                    className={instituteError ? 'error' : ''}
+                    type='text'
+                    value={institute}
+                    name='institute'
+                  />
+                  <span>
+                    <img src={errorsvg} />
+                  </span>
+                  <p>{instituteError}</p>
+                </>
+              ) : (
+                <>
+                  {' '}
+                  <label for='institute'>სასწავლებელი</label>
+                  <input
+                    onChange={(e) => setInstitute(e.target.value)}
+                    onKeyUp={(e) =>
+                      localStorage.setItem('institute', e.target.value)
+                    }
+                    placeholder='სასწავლებელი'
+                    type='text'
+                    value={institute}
+                    name='institute'
+                    className={
+                      instituteError
+                        ? 'error'
+                        : institute.length == 0
+                        ? ''
+                        : 'success'
+                    }
+                  />
+                  {institute.length !== 0 && (
+                    <span>
+                      <img src={successsvg} />
+                    </span>
+                  )}
+                  <p>მინიმუმ 2 სიმბოლო</p>
+                </>
+              )}
             </div>
             <div className='date-container'>
               <div>
@@ -98,7 +217,7 @@ const Education = () => {
                     აირჩიეთ ხარისხი
                   </option>
                   {degrees.map((degree) => (
-                    <option value={degree.title}>{degree.title}</option>
+                    <option value={degree.id}>{degree.title}</option>
                   ))}
                 </select>
               </div>
@@ -186,7 +305,9 @@ const Education = () => {
             <button className='purple-button'>უკან</button>
           </Link>
 
-          <button className='purple-button'>შემდეგი</button>
+          <button onClick={submitHandler} className='purple-button'>
+            დასრულება
+          </button>
         </div>
       </div>
 
