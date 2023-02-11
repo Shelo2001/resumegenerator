@@ -39,6 +39,7 @@ const personSlice = createSlice({
   initialState: {
     person_info: {},
     person_experience: [],
+    person_education: [],
     degrees: [],
     resume: [],
   },
@@ -52,7 +53,7 @@ const personSlice = createSlice({
       localStorage.setItem('person_experience', JSON.stringify(payload))
     },
     addPersonEducation: (state, { payload }, getState) => {
-      state.person_experience = payload
+      state.person_education = payload
       localStorage.setItem('person_education', JSON.stringify(payload))
     },
   },
@@ -63,6 +64,9 @@ const personSlice = createSlice({
     [storeResume.fulfilled]: (state, { payload }) => {
       localStorage.setItem('resume_fulfilled', JSON.stringify(payload))
       state.resume = payload
+      state.person_info = {}
+      state.person_experience = []
+      state.degrees = []
     },
   },
 })

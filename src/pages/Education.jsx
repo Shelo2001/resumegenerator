@@ -27,7 +27,6 @@ const Education = () => {
     localStorage.getItem('institute') || ''
   )
   const [degree, setDegree] = useState('')
-  const [imageFile, setImageFile] = useState(null)
   const [due_date, setDue_date] = useState('')
 
   const [descriptionError, setDescriptionError] = useState('')
@@ -243,7 +242,7 @@ const Education = () => {
                       )
                     }
                     value={description}
-                    placeholder='როლი თანამდებობაზე და ზოგადი აღწერა'
+                    placeholder='განათლების აღწერა'
                     name='description'
                     className={
                       descriptionError
@@ -274,7 +273,7 @@ const Education = () => {
                       )
                     }
                     onBlur={(e) => setTouchedDescription(true)}
-                    placeholder='როლი თანამდებობაზე და ზოგადი აღწერა'
+                    placeholder='განათლების აღწერა'
                     name='description'
                     value={description}
                     className={
@@ -311,7 +310,7 @@ const Education = () => {
         </div>
       </div>
 
-      <LiveResume />
+      <LiveResume education={array} />
     </div>
   )
 }

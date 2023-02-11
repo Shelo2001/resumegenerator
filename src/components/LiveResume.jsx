@@ -1,46 +1,184 @@
-import React from 'react'
+import React, { useEffect } from 'react'
 import '../global.scss'
 import logo from '../assets/logo3.png'
-import { useSelector } from 'react-redux'
+import email from '../assets/email.svg'
+import phone from '../assets/phone.png'
+import { useDispatch, useSelector } from 'react-redux'
+import { getDegrees } from '../features/personSlice'
 
-const LiveResume = ({ person, experience }) => {
-  const { person_info } = useSelector((state) => state.person)
+const LiveResume = ({ person, experience, education }) => {
+  const personInfo = JSON.parse(localStorage.getItem('person_info'))
+  const personExperience = JSON.parse(localStorage.getItem('person_experience'))
+  const personEducation = JSON.parse(localStorage.getItem('person_education'))
+  const dispatch = useDispatch()
+  const { degrees } = useSelector((state) => state.person)
+
+  console.log(degrees)
+
+  useEffect(() => {
+    dispatch(getDegrees())
+  }, [])
 
   return (
     <div className='live-resume-container'>
-      {person?.name ? <p>{person.name}</p> : <p>{person_info.name}</p>}
-      {person?.surname ? <p>{person.surname}</p> : <p>{person_info.surname}</p>}
-      {person?.image ? (
-        <img
-          width='200px'
-          height='200px'
-          src={URL.createObjectURL(person?.image)}
-        />
-      ) : (
-        <img width='200px' height='200px' src={person_info.image} />
-      )}
-      {person?.aboutme ? (
-        <p>{person?.aboutme}</p>
-      ) : (
-        <p>{person_info?.aboutme}</p>
-      )}
-      {person?.email ? <p>{person?.email}</p> : <p>{person_info?.email}</p>}
-      {person?.phoneNumber ? (
-        <p>{person?.phoneNumber}</p>
-      ) : (
-        <p>{person_info?.phoneNumber}</p>
-      )}
-      {experience ? (
-        experience.map((field) => (
-          <>
-            <p>{field.position}</p>
-            <p></p>
-          </>
-        ))
-      ) : (
-        <></>
-      )}
-      <img width='50px' height='50px' src={logo} />
+      <div className='person-info-container'>
+        <div className='person-info-left'>
+          <div className='person-name-surname'>
+            {person?.name || person?.surname ? (
+              <p>
+                {person?.name} {person?.surname}
+              </p>
+            ) : (
+              <p>
+                {personInfo?.name} {personInfo?.surname}
+              </p>
+            )}
+          </div>
+          <div className='person-contact'>
+            <div>
+              {person?.email ? (
+                <>
+                  <i class='fa-solid fa-at'></i>
+                  <span>{person?.email}</span>
+                </>
+              ) : personInfo?.email ? (
+                <>
+                  <i class='fa-solid fa-at'></i>
+                  <span>{personInfo?.email}</span>
+                </>
+              ) : (
+                <></>
+              )}
+            </div>
+            <div>
+              {person?.phone_number ? (
+                <>
+                  <i class='fa-solid fa-phone'></i>
+                  <span>{person?.phone_number}</span>
+                </>
+              ) : personInfo?.phone_number ? (
+                <>
+                  <i class='fa-solid fa-phone'></i>
+                  <span>{personInfo?.phone_number}</span>
+                </>
+              ) : (
+                <></>
+              )}
+            </div>
+          </div>
+          <div className='person-about-me'>
+            {person?.about_me ? (
+              <>
+                <p className='about-me-header'>ჩემ შესახებ</p>
+                <div>
+                  <p className='about-me'>{person?.about_me}</p>
+                </div>
+              </>
+            ) : personInfo?.about_me ? (
+              <>
+                <p className='about-me-header'>ჩემ შესახებ</p>
+                <div>
+                  <p className='about-me'>{personInfo?.about_me}</p>
+                </div>
+              </>
+            ) : (
+              <></>
+            )}
+          </div>
+        </div>
+        <div className='person-info-right'>
+          {person?.image ? (
+            <img
+              className='person-image'
+              src={URL.createObjectURL(person?.image)}
+            />
+          ) : personInfo?.image ? (
+            <img className='person-image' src={personInfo?.image} />
+          ) : (
+            <></>
+          )}
+        </div>
+      </div>
+      {personInfo?.name && <hr />}
+      <div className='person-experience'>
+        {personInfo?.name && (
+          <div className='person-experience-header'>
+            <p>გამოცდილება</p>
+          </div>
+        )}
+        {experience
+          ? experience?.slice(1)?.map((item) => (
+              <>
+                <div className='person-experience-position'>
+                  <p className='position'>
+                    {item.position}, {item.employer}
+                  </p>
+                  <p className='dates'>
+                    {item.start_date} - {item.due_date}
+                  </p>
+                </div>
+                <div className='description'>
+                  <p>{item.description}</p>
+                </div>
+              </>
+            ))
+          : personExperience?.slice(1)?.map((item) => (
+              <>
+                <div className='person-experience-position'>
+                  <p className='position'>
+                    {item.position}, {item.employer}
+                  </p>
+                  <p className='dates'>
+                    {item.start_date} - {item.due_date}
+                  </p>
+                </div>
+                <div className='description'>
+                  <p>{item.description}</p>
+                </div>
+              </>
+            ))}
+      </div>
+      {personExperience ? <hr /> : <></>}
+      <div className='person-experience'>
+        {personExperience ? (
+          <div className='person-experience-header'>
+            <p>განათლება</p>
+          </div>
+        ) : (
+          <></>
+        )}
+        {education
+          ? education?.slice(1)?.map((item) => (
+              <>
+                <div className='person-experience-position'>
+                  <p className='position'>
+                    {item.institute},{' '}
+                    {degrees
+                      .filter((degree) => degree.id == item.degree_id)
+                      .map((p) => {
+                        return p.title
+                      })}
+                  </p>
+                  <p className='dates'>{item.due_date}</p>
+                </div>
+                <div className='description'>
+                  <p>{item.description}</p>
+                </div>
+              </>
+            ))
+          : personEducation?.slice(1)?.map((item) => (
+              <>
+                <div className='person-experience-position'>
+                  <p className='position'>{item.institute}</p>
+                  <p className='dates'>{item.due_date}</p>
+                </div>
+                <div className='description'>
+                  <p>{item.description}</p>
+                </div>
+              </>
+            ))}
+      </div>
+      <img className='logo-img' width='50px' height='50px' src={logo} />
     </div>
   )
 }

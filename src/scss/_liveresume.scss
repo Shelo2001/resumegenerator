@@ -3,10 +3,83 @@
   right: 0;
   top: 0;
   width: 40%;
+  height: 100vh;
   min-height: 100vh;
-  img {
+  overflow: scroll;
+  overflow-x: hidden;
+  .person-info-container {
+    display: flex;
+    justify-content: center;
+    margin: 20px;
+    .person-info-left {
+      display: flex;
+      flex-direction: column;
+      gap: 20px;
+      width: 60%;
+      .person-name-surname {
+        p {
+          font-size: 36px;
+          font-weight: 700;
+          color: #f93b1d;
+        }
+      }
+      .person-contact {
+        div {
+          display: flex;
+          gap: 20px;
+          margin: 20px;
+          font-size: 18px;
+        }
+      }
+      .person-about-me {
+        .about-me-header {
+          font-size: 20px;
+          font-weight: 700;
+          color: #f93b1d;
+        }
+        .about-me {
+          width: 100%;
+        }
+      }
+    }
+    .person-info-right {
+      max-width: 40%;
+      .person-image {
+        width: 300px;
+        height: 300px;
+        border-radius: 200px;
+      }
+    }
+  }
+  .person-experience {
+    display: flex;
+    margin: 20px;
+    flex-direction: column;
+    .person-experience-header {
+      font-size: 20px;
+      font-weight: 700;
+      color: #f93b1d;
+    }
+    .person-experience-position {
+      .position {
+        font-weight: 600;
+      }
+      .dates {
+        font-style: italic;
+        color: #909090;
+      }
+    }
+  }
+  .logo-img {
     position: absolute;
-    bottom: 40px;
-    left: 40px;
+    margin: 20px;
+  }
+  i {
+    color: #898989;
+  }
+  hr {
+    width: 94%;
+    margin: auto;
+    border: 1px solid #c8c8c8;
   }
 }
