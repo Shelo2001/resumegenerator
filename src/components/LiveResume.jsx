@@ -176,7 +176,9 @@ const LiveResume = ({ person, experience, education }) => {
               </>
             ))}
       </div>
-      <img className='logo-img' width='50px' height='50px' src={logo} />
+      {localStorage.getItem('name') && (
+        <img className='logo-img' width='50px' height='50px' src={logo} />
+      )}
     </div>
   )
 }

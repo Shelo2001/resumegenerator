@@ -7,7 +7,8 @@
   justify-content: center;
   margin: auto;
   border: 1px solid black;
-  min-height: 100vh;
+  min-height: 80vh;
+
   margin-top: 30px;
   margin-bottom: 30px;
   overflow: scroll;
@@ -20,11 +21,10 @@
     .person-info-left {
       display: flex;
       flex-direction: column;
-      gap: 10px;
       width: 60%;
       .person-name-surname {
         p {
-          font-size: 36px;
+          font-size: 34px;
           font-weight: 700;
           color: #f93b1d;
         }
@@ -32,8 +32,7 @@
       .person-contact {
         div {
           display: flex;
-          gap: 10px;
-          margin: 20px;
+          margin-bottom: 10px;
           font-size: 18px;
         }
       }
@@ -59,7 +58,8 @@
   }
   .person-experience {
     display: flex;
-    margin: 34px;
+    margin-left: 36px;
+    margin-right: 34px;
     flex-direction: column;
     .person-experience-header {
       font-size: 20px;
@@ -86,7 +86,7 @@
     color: #898989;
   }
   hr {
-    width: 94%;
+    width: 90%;
     margin: auto;
     border: 1px solid #c8c8c8;
   }

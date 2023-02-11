@@ -50,11 +50,18 @@ const ResumeReview = () => {
             <div className='person-contact'>
               <div>
                 <i class='fa-solid fa-at'></i>
-                <span>{resume?.email}</span>
+                <span>&nbsp;&nbsp;&nbsp;{resume?.email}</span>
               </div>
               <div>
                 <i class='fa-solid fa-phone'></i>
-                <span>{resume?.phone_number}</span>
+                <span>
+                  &nbsp;&nbsp;&nbsp;
+                  {resume?.phone_number.slice(0, 4)}&nbsp;
+                  {resume?.phone_number.slice(4, 7)}&nbsp;
+                  {resume?.phone_number.slice(7, 9)}&nbsp;
+                  {resume?.phone_number.slice(9, 11)}&nbsp;
+                  {resume?.phone_number.slice(11, 13)}
+                </span>
               </div>
             </div>
             <div className='person-about-me'>
@@ -121,7 +128,13 @@ const ResumeReview = () => {
             </>
           ))}
         </div>
-        <img className='logo-img' width='50px' height='50px' src={logo} />
+        <img
+          style={{ marginTop: '100px' }}
+          className='logo-img'
+          width='50px'
+          height='50px'
+          src={logo}
+        />
       </div>
     </div>
   )
