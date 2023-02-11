@@ -13,8 +13,6 @@ const LiveResume = ({ person, experience, education }) => {
   const dispatch = useDispatch()
   const { degrees } = useSelector((state) => state.person)
 
-  console.log(degrees)
-
   useEffect(() => {
     dispatch(getDegrees())
   }, [])

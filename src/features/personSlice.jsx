@@ -67,6 +67,7 @@ const personSlice = createSlice({
       state.person_info = {}
       state.person_experience = []
       state.degrees = []
+      window.location.href = '/resume/overview'
     },
   },
 })

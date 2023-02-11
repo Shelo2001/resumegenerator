@@ -13,6 +13,7 @@ import {
   positionValidation,
 } from '../Validations'
 import { addPersonEducation } from '../features/personSlice'
+import { toast } from 'react-toastify'
 
 const Education = () => {
   const dispatch = useDispatch()
@@ -123,7 +124,6 @@ const Education = () => {
         }
 
         dispatch(storeResume(data))
-        navigate('/resume/overview')
       })
   }
 
