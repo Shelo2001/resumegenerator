@@ -68,14 +68,14 @@ const LiveResume = ({ person, experience, education }) => {
           <div className='person-about-me'>
             {person?.about_me ? (
               <>
-                <p className='about-me-header'>ჩემ შესახებ</p>
+                <p className='about-me-header'>ᲩᲔᲛ ᲨᲔᲡᲐᲮᲔᲑ</p>
                 <div>
                   <p className='about-me'>{person?.about_me}</p>
                 </div>
               </>
             ) : personInfo?.about_me ? (
               <>
-                <p className='about-me-header'>ჩემ შესახებ</p>
+                <p className='about-me-header'>ᲩᲔᲛ ᲨᲔᲡᲐᲮᲔᲑ</p>
                 <div>
                   <p className='about-me'>{personInfo?.about_me}</p>
                 </div>
@@ -102,7 +102,7 @@ const LiveResume = ({ person, experience, education }) => {
       <div className='person-experience'>
         {personInfo?.name && (
           <div className='person-experience-header'>
-            <p>გამოცდილება</p>
+            <p>ᲒᲐᲛᲝᲪᲓᲘᲚᲔᲑᲐ</p>
           </div>
         )}
         {experience
@@ -145,7 +145,7 @@ const LiveResume = ({ person, experience, education }) => {
       <div className='person-experience'>
         {personExperience ? (
           <div className='person-experience-header'>
-            <p>განათლება</p>
+            <p>ᲒᲐᲜᲐᲗᲚᲔᲑᲐ</p>
           </div>
         ) : (
           <></>

@@ -270,7 +270,7 @@ const Educations = () => {
         </Link>
 
         <div className='navbar-container'>
-          <h2>განათლება</h2>
+          <h2>ᲒᲐᲜᲐᲗᲚᲔᲑᲐ</h2>
           <h2>3/3</h2>
         </div>
       </div>
@@ -288,11 +288,11 @@ const Educations = () => {
         </button>
         <div className='education-button-group'>
           <Link to='/resume/2'>
-            <button className='purple-button'>უკან</button>
+            <button className='purple-button'>ᲣᲙᲐᲜ</button>
           </Link>
 
           <button className='purple-button' onClick={submitHandler}>
-            დასრულება
+            ᲓᲐᲡᲠᲣᲚᲔᲑᲐ
           </button>
         </div>
       </div>

@@ -72,7 +72,7 @@ const ResumeReview = () => {
             <div className='person-about-me'>
               {resume?.about_me ? (
                 <>
-                  <p className='about-me-header'>ჩემ შესახებ</p>
+                  <p className='about-me-header'>ᲩᲔᲛ ᲨᲔᲡᲐᲮᲔᲑ</p>
                   <div>
                     <p className='about-me'>{resume?.about_me}</p>
                   </div>
@@ -94,7 +94,7 @@ const ResumeReview = () => {
 
         <div className='person-experience'>
           <div className='person-experience-header'>
-            <p>გამოცდილება</p>
+            <p>ᲒᲐᲛᲝᲪᲓᲘᲚᲔᲑᲐ</p>
           </div>
           {resume?.experiences?.map((item) => (
             <>
@@ -117,7 +117,7 @@ const ResumeReview = () => {
 
         <div className='person-experience'>
           <div className='person-experience-header'>
-            <p>განათლება</p>
+            <p>ᲒᲐᲜᲐᲗᲚᲔᲑᲐ</p>
           </div>
           {resume?.educations?.map((item) => (
             <>

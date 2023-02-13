@@ -100,7 +100,7 @@ const PersonalInfo = () => {
         </Link>
 
         <div className='navbar-container'>
-          <h2>პირადი ინფო</h2>
+          <h2>ᲞᲘᲠᲐᲓᲘ ᲘᲜᲤᲝ</h2>
           <h2>1/3</h2>
         </div>
       </div>
@@ -325,7 +325,7 @@ const PersonalInfo = () => {
           )}
         </div>
         <button onClick={submitPersonalInfo} className='purple-button'>
-          შემდეგი
+          ᲨᲔᲛᲓᲔᲒᲘ
         </button>
       </div>
       <LiveResume person={person} />

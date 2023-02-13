@@ -14,7 +14,7 @@ const Landing = () => {
       <div>
         <div className='landing-content'>
           <Link to='/resume/1'>
-            <button>რეზიუმეს დამატება</button>
+            <button>ᲠᲔᲖᲘᲣᲛᲔᲡ ᲓᲐᲛᲐᲢᲔᲑᲐ</button>
           </Link>
         </div>
         <img className='landing-img' src={logo2} />

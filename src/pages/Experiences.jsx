@@ -271,7 +271,7 @@ const Experiences = () => {
           </button>
         </Link>
         <div className='navbar-container'>
-          <h2>გამოცდილება</h2>
+          <h2>ᲒᲐᲛᲝᲪᲓᲘᲚᲔᲑᲐ</h2>
           <h2>2/3</h2>
         </div>
       </div>
@@ -292,11 +292,11 @@ const Experiences = () => {
         </button>
         <div className='button-group'>
           <Link to='/resume/1'>
-            <button className='purple-button'>უკან</button>
+            <button className='purple-button'>ᲣᲙᲐᲜ</button>
           </Link>
 
           <button onClick={submitHandler} className='purple-button'>
-            შემდეგი
+            ᲨᲔᲛᲓᲔᲒᲘ
           </button>
         </div>
       </div>
