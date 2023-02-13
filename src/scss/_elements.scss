@@ -21,7 +21,7 @@ input[type='text'],
 input[type='email'],
 select,
 input[type='date'] {
-  border: 2px solid #d5d5d5;
+  border: 1px solid #d5d5d5;
   width: 100%;
   border-radius: 6px;
   outline: none;
@@ -39,7 +39,7 @@ select {
 
 input[type='text'],
 input[type='email']:focus {
-  border: 2px solid #c4c4c4;
+  border: 1px solid #c4c4c4;
 }
 input::-webkit-input-placeholder {
   font-family: HelveticaNeue;
