@@ -1,8 +1,6 @@
 import React, { useEffect } from 'react'
 import '../global.scss'
 import logo from '../assets/logo3.png'
-import email from '../assets/email.svg'
-import phone from '../assets/phone.png'
 import { useDispatch, useSelector } from 'react-redux'
 import { getDegrees } from '../features/personSlice'
 
@@ -105,7 +103,7 @@ const LiveResume = ({ person, experience, education }) => {
           </div>
         )}
         {experience
-          ? experience?.slice(1)?.map((item) => (
+          ? experience?.map((item) => (
               <>
                 <div className='person-experience-position'>
                   <p className='position'>
@@ -120,7 +118,7 @@ const LiveResume = ({ person, experience, education }) => {
                 </div>
               </>
             ))
-          : personExperience?.slice(1)?.map((item) => (
+          : personExperience?.map((item) => (
               <>
                 <div className='person-experience-position'>
                   <p className='position'>

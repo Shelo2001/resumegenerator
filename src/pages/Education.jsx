@@ -101,7 +101,6 @@ const Education = () => {
     )
     let phone_number = person_info.phone_number.replace(/ /g, '')
 
-    person_experience.shift()
     person_education.shift()
 
     const url = person_info.image
