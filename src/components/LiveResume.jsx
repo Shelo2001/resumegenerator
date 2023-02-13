@@ -7,7 +7,10 @@ import { getDegrees } from '../features/personSlice'
 const LiveResume = ({ person, experience, education }) => {
   const personInfo = JSON.parse(localStorage.getItem('person_info'))
   const personExperience = JSON.parse(localStorage.getItem('person_experience'))
-  const personEducation = JSON.parse(localStorage.getItem('person_education'))
+  const personEducation = JSON.parse(
+    localStorage.getItem('person_education') ||
+      localStorage.getItem('educations')
+  )
   const dispatch = useDispatch()
   const { degrees } = useSelector((state) => state.person)
 
@@ -107,10 +110,14 @@ const LiveResume = ({ person, experience, education }) => {
               <>
                 <div className='person-experience-position'>
                   <p className='position'>
-                    {item.position}, {item.employer}
+                    {item.position}
+                    {item.position.length > 0 && ', '}
+                    {item.employer}
                   </p>
                   <p className='dates'>
-                    {item.start_date} - {item.due_date}
+                    {item.start_date}
+                    {item.start_date.length > 0 && ' - '}
+                    {item.due_date}
                   </p>
                 </div>
                 <div className='description'>
@@ -144,11 +151,12 @@ const LiveResume = ({ person, experience, education }) => {
           <></>
         )}
         {education
-          ? education?.slice(1)?.map((item) => (
+          ? education?.map((item) => (
               <>
                 <div className='person-experience-position'>
                   <p className='position'>
-                    {item.institute},{' '}
+                    {item.institute}
+                    {item.institute.length > 0 && ', '}
                     {degrees
                       .filter((degree) => degree.id == item.degree_id)
                       .map((p) => {
@@ -162,7 +170,7 @@ const LiveResume = ({ person, experience, education }) => {
                 </div>
               </>
             ))
-          : personEducation?.slice(1)?.map((item) => (
+          : personEducation?.map((item) => (
               <>
                 <div className='person-experience-position'>
                   <p className='position'>{item.institute}</p>

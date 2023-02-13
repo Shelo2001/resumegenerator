@@ -181,15 +181,16 @@ const Experiences = () => {
   const navigate = useNavigate()
 
   const [experiences, setExperiences] = useState(
-    JSON.parse(localStorage.getItem('person_experience')) || [
-      {
-        position: '',
-        employer: '',
-        start_date: '',
-        due_date: '',
-        description: '',
-      },
-    ]
+    JSON.parse(localStorage.getItem('person_experience')) ||
+      JSON.parse(localStorage.getItem('experiences')) || [
+        {
+          position: '',
+          employer: '',
+          start_date: '',
+          due_date: '',
+          description: '',
+        },
+      ]
   )
 
   const handleChange = (event) => {
@@ -213,6 +214,7 @@ const Experiences = () => {
         }
       })
     )
+    localStorage.setItem('experiences', JSON.stringify(experiences))
   }
 
   const handleAddExperience = () => {
