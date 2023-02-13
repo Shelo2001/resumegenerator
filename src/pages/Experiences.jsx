@@ -44,6 +44,7 @@ const Experience = ({
             value={position}
             className={positionError ? 'error' : ''}
             name={`position-${index}`}
+            placeholder='დეველოპერი, დიზაინერი, ა.შ.'
             onChange={handleChange}
           />
           <span>
@@ -59,6 +60,7 @@ const Experience = ({
             value={position}
             name={`position-${index}`}
             onChange={handleChange}
+            placeholder='დეველოპერი, დიზაინერი, ა.შ.'
             className={
               positionError ? 'error' : position.length == 0 ? '' : 'success'
             }
@@ -77,6 +79,7 @@ const Experience = ({
           <input
             type='text'
             value={employer}
+            placeholder='დამსაქმებელი'
             name={`employer-${index}`}
             className={employerError ? 'error' : ''}
             onChange={handleChange}
@@ -92,6 +95,7 @@ const Experience = ({
           <input
             type='text'
             value={employer}
+            placeholder='დამსაქმებელი'
             name={`employer-${index}`}
             onChange={handleChange}
             className={
@@ -134,6 +138,7 @@ const Experience = ({
             value={description}
             name={`description-${index}`}
             onBlur={(e) => setTouchedDescription(true)}
+            placeholder='როლი თანამდებობაზე და ზოგადი აღწერა'
             onChange={handleChange}
             className={
               descriptionError ? 'error' : description.length == 0 ? '' : ''
@@ -154,6 +159,7 @@ const Experience = ({
           <textarea
             value={description}
             name={`description-${index}`}
+            placeholder='როლი თანამდებობაზე და ზოგადი აღწერა'
             onBlur={(e) => setTouchedDescription(true)}
             onChange={handleChange}
             className={

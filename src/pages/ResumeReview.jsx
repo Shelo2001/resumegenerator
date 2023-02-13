@@ -50,7 +50,12 @@ const ResumeReview = () => {
             <div className='person-contact'>
               <div>
                 <i class='fa-solid fa-at'></i>
-                <span>&nbsp;&nbsp;&nbsp;{resume?.email}</span>
+                <a
+                  style={{ textDecoration: 'none', color: 'inherit' }}
+                  href={`mailto:${resume?.email}`}
+                >
+                  &nbsp;&nbsp;&nbsp;{resume?.email}
+                </a>
               </div>
               <div>
                 <i class='fa-solid fa-phone'></i>

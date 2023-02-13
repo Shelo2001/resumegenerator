@@ -180,7 +180,7 @@ const PersonalInfo = () => {
                     localStorage.setItem('surname', e.target.value)
                   }
                   value={surname}
-                  placeholder='ანზორ'
+                  placeholder='მუმლაძე'
                   type='text'
                   name='firstName'
                   className={

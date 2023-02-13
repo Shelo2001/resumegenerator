@@ -42,9 +42,10 @@ const Education = ({
     <>
       {instituteError ? (
         <div className='position-container'>
-          <label for='institute'>თანამდებობა</label>
+          <label for='institute'>სასწავლებელი</label>
           <input
             type='text'
+            placeholder='სასწავლებელი'
             value={institute}
             className={instituteError ? 'error' : ''}
             name={`institute-${index}`}
@@ -57,10 +58,11 @@ const Education = ({
         </div>
       ) : (
         <div className='position-container'>
-          <label for='institute'>თანამდებობა</label>
+          <label for='institute'>სასწავლებელი</label>
           <input
             type='text'
             value={institute}
+            placeholder='სასწავლებელი'
             name={`institute-${index}`}
             onChange={handleChange}
             className={
@@ -108,6 +110,7 @@ const Education = ({
             value={description}
             name={`description-${index}`}
             onBlur={(e) => setTouchedDescription(true)}
+            placeholder='განათლების აღწერა'
             onChange={handleChange}
             className={
               descriptionError ? 'error' : description.length == 0 ? '' : ''
@@ -129,6 +132,7 @@ const Education = ({
             value={description}
             name={`description-${index}`}
             onBlur={(e) => setTouchedDescription(true)}
+            placeholder='განათლების აღწერა'
             onChange={handleChange}
             className={
               descriptionError
